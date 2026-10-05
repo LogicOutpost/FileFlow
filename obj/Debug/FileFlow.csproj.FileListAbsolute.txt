@@ -1,0 +1,15 @@
+D:\C# projects\FileFlow\FileFlow\bin\Debug\FileFlow.exe.config
+D:\C# projects\FileFlow\FileFlow\bin\Debug\FileFlow.exe
+D:\C# projects\FileFlow\FileFlow\bin\Debug\FileFlow.pdb
+D:\C# projects\FileFlow\FileFlow\obj\Debug\FileFlow.csproj.AssemblyReference.cache
+D:\C# projects\FileFlow\FileFlow\obj\Debug\FileFlow.homePage.resources
+D:\C# projects\FileFlow\FileFlow\obj\Debug\FileFlow.Properties.Resources.resources
+D:\C# projects\FileFlow\FileFlow\obj\Debug\FileFlow.csproj.GenerateResource.cache
+D:\C# projects\FileFlow\FileFlow\obj\Debug\FileFlow.csproj.CoreCompileInputs.cache
+D:\C# projects\FileFlow\FileFlow\obj\Debug\FileFlow.exe
+D:\C# projects\FileFlow\FileFlow\obj\Debug\FileFlow.pdb
+D:\C# projects\FileFlow\FileFlow\obj\Debug\FileFlow.exe.config
+D:\C# projects\FileFlow\FileFlow\bin\Debug\FileFlow.exe.manifest
+D:\C# projects\FileFlow\FileFlow\bin\Debug\FileFlow.application
+D:\C# projects\FileFlow\FileFlow\obj\Debug\FileFlow.exe.manifest
+D:\C# projects\FileFlow\FileFlow\obj\Debug\FileFlow.application
