@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -10,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace FileFlow
 {
@@ -91,118 +93,168 @@ namespace FileFlow
 
         private void SortFiles()
         {
+            int amountOfFiles = 0;
             string[] files = Directory.GetFiles(filePath);
             string combinedPath = "";
+            // Create log file
+            string logFile = $"FileFlow - {DateTime.Now:yyyy-MM-dd_HH-mm-ss}.txt";
+            string logPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string logCombined = Path.Combine(logPath, logFile);
+            // log directory
+            string logDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string logFolder = "FileFlow Logs";
+            string combineFolder = Path.Combine(logDir, logFolder);
+            // Create the directory 
+            if (!Directory.Exists(combineFolder))
+            {
+                Directory.CreateDirectory(combineFolder);
+            }
             try
             {
-                foreach (string file in files)
+                using (StreamWriter writer = new StreamWriter(logCombined, true))
                 {
-                    if (Images.Contains(Path.GetExtension(file)))
+                    if (!File.Exists(logCombined))
                     {
-                        combinedPath = Path.Combine(filePath, "Images");
-
-                        if (!Directory.Exists(combinedPath))
-                        {
-                            Directory.CreateDirectory(combinedPath);
-                        }
-
-                        string destination = Path.Combine(combinedPath, Path.GetFileName(file));
-
-                        File.Move(file, destination);
+                        File.Create(logCombined).Close();
                     }
-                    else if (Documents.Contains(Path.GetExtension(file)))
+                    foreach (string file in files)
                     {
-                        combinedPath = Path.Combine(filePath, "Documents");
-
-                        if (!Directory.Exists(combinedPath))
+                        if (Images.Contains(Path.GetExtension(file)))
                         {
-                            Directory.CreateDirectory(combinedPath);
+                            combinedPath = Path.Combine(filePath, "Images");
+
+                            if (!Directory.Exists(combinedPath))
+                            {
+                                Directory.CreateDirectory(combinedPath);
+                            }
+
+                            string destination = Path.Combine(combinedPath, Path.GetFileName(file));
+
+                            File.Move(file, destination);
+                            writer.Write($"File: {file} moved to {destination}\n");
+                            writer.Write("-------------------------------------------------------------------------------------------------------\n");
+                            amountOfFiles++;
+
                         }
-
-                        string destination = Path.Combine(combinedPath, Path.GetFileName(file));
-
-                        File.Move(file, destination);
-                    }
-                    else if (SpreadSheets.Contains(Path.GetExtension(file)))
-                    {
-                        combinedPath = Path.Combine(filePath, "Spred Sheets");
-
-                        if (!Directory.Exists(combinedPath))
+                        else if (Documents.Contains(Path.GetExtension(file)))
                         {
-                            Directory.CreateDirectory(combinedPath);
+                            combinedPath = Path.Combine(filePath, "Documents");
+
+                            if (!Directory.Exists(combinedPath))
+                            {
+                                Directory.CreateDirectory(combinedPath);
+                            }
+
+                            string destination = Path.Combine(combinedPath, Path.GetFileName(file));
+
+                            File.Move(file, destination);
+                            writer.Write($"File: {file} moved to {destination}\n");
+                            writer.Write("-------------------------------------------------------------------------------------------------------\n");
+                            amountOfFiles++;
+
                         }
-
-                        string destination = Path.Combine(combinedPath, Path.GetFileName(file));
-
-                        File.Move(file, destination);
-                    }
-                    else if (Audio.Contains(Path.GetExtension(file)))
-                    {
-                        combinedPath = Path.Combine(filePath, "Audio Files");
-
-                        if (!Directory.Exists(combinedPath))
+                        else if (SpreadSheets.Contains(Path.GetExtension(file)))
                         {
-                            Directory.CreateDirectory(combinedPath);
+                            combinedPath = Path.Combine(filePath, "Spred Sheets");
+
+                            if (!Directory.Exists(combinedPath))
+                            {
+                                Directory.CreateDirectory(combinedPath);
+                            }
+
+                            string destination = Path.Combine(combinedPath, Path.GetFileName(file));
+
+                            File.Move(file, destination);
+                            writer.Write($"File: {file} moved to {destination}\n");
+                            writer.Write("-------------------------------------------------------------------------------------------------------\n");
+                            amountOfFiles++;
                         }
-
-                        string destination = Path.Combine(combinedPath, Path.GetFileName(file));
-
-                        File.Move(file, destination);
-                    }
-                    else if (Video.Contains(Path.GetExtension(file)))
-                    {
-                        combinedPath = Path.Combine(filePath, "Video Files");
-
-                        if (!Directory.Exists(combinedPath))
+                        else if (Audio.Contains(Path.GetExtension(file)))
                         {
-                            Directory.CreateDirectory(combinedPath);
+                            combinedPath = Path.Combine(filePath, "Audio Files");
+
+                            if (!Directory.Exists(combinedPath))
+                            {
+                                Directory.CreateDirectory(combinedPath);
+                            }
+
+                            string destination = Path.Combine(combinedPath, Path.GetFileName(file));
+
+                            File.Move(file, destination);
+                            File.Move(file, destination);
+                            writer.Write($"File: {file} moved to {destination}\n");
+                            writer.Write("-------------------------------------------------------------------------------------------------------\n");
+                            amountOfFiles++;
                         }
-
-                        string destination = Path.Combine(combinedPath, Path.GetFileName(file));
-
-                        File.Move(file, destination);
-                    }
-                    else if (Arch.Contains(Path.GetExtension(file)))
-                    {
-                        combinedPath = Path.Combine(filePath, "Archives");
-
-                        if (!Directory.Exists(combinedPath))
+                        else if (Video.Contains(Path.GetExtension(file)))
                         {
-                            Directory.CreateDirectory(combinedPath);
+                            combinedPath = Path.Combine(filePath, "Video Files");
+
+                            if (!Directory.Exists(combinedPath))
+                            {
+                                Directory.CreateDirectory(combinedPath);
+                            }
+
+                            string destination = Path.Combine(combinedPath, Path.GetFileName(file));
+
+                            File.Move(file, destination);
+                            writer.Write($"File: {file} moved to {destination}\n");
+                            writer.Write("-------------------------------------------------------------------------------------------------------\n");
+                            amountOfFiles++;
                         }
-
-                        string destination = Path.Combine(combinedPath, Path.GetFileName(file));
-
-                        File.Move(file, destination);
-                    }
-                    else if (Code.Contains(Path.GetExtension(file)))
-                    {
-                        combinedPath = Path.Combine(filePath, "Code files");
-
-                        if (!Directory.Exists(combinedPath))
+                        else if (Arch.Contains(Path.GetExtension(file)))
                         {
-                            Directory.CreateDirectory(combinedPath);
+                            combinedPath = Path.Combine(filePath, "Archives");
+
+                            if (!Directory.Exists(combinedPath))
+                            {
+                                Directory.CreateDirectory(combinedPath);
+                            }
+
+                            string destination = Path.Combine(combinedPath, Path.GetFileName(file));
+
+                            File.Move(file, destination);
+                            writer.Write($"File: {file} moved to {destination}\n");
+                            writer.Write("-------------------------------------------------------------------------------------------------------\n");
+                            amountOfFiles++;
                         }
-
-                        string destination = Path.Combine(combinedPath, Path.GetFileName(file));
-
-                        File.Move(file, destination);
-                    }
-                    else if (Disk.Contains(Path.GetExtension(file)))
-                    {
-                        combinedPath = Path.Combine(filePath, "Disk Files");
-
-                        if (!Directory.Exists(combinedPath))
+                        else if (Code.Contains(Path.GetExtension(file)))
                         {
-                            Directory.CreateDirectory(combinedPath);
+                            combinedPath = Path.Combine(filePath, "Code files");
+
+                            if (!Directory.Exists(combinedPath))
+                            {
+                                Directory.CreateDirectory(combinedPath);
+                            }
+
+                            string destination = Path.Combine(combinedPath, Path.GetFileName(file));
+
+                            File.Move(file, destination);
+                            writer.Write($"File: {file} moved to {destination}\n");
+                            writer.Write("-------------------------------------------------------------------------------------------------------\n");
+                            amountOfFiles++;
                         }
+                        else if (Disk.Contains(Path.GetExtension(file)))
+                        {
+                            combinedPath = Path.Combine(filePath, "Disk Files");
 
-                        string destination = Path.Combine(combinedPath, Path.GetFileName(file));
+                            if (!Directory.Exists(combinedPath))
+                            {
+                                Directory.CreateDirectory(combinedPath);
+                            }
 
-                        File.Move(file, destination);
+                            string destination = Path.Combine(combinedPath, Path.GetFileName(file));
+
+                            File.Move(file, destination);
+                            writer.Write($"File: {file} moved to {destination}\n");
+                            writer.Write("-------------------------------------------------------------------------------------------------------\n");
+                            amountOfFiles++;
+                        }
                     }
+                    writer.Write($"Sorting complete, {amountOfFiles} files have been moved");
                 }
                 MessageBox.Show("Files sorted", "We're Done");
+                File.Move(logCombined, Path.Combine(combineFolder, logFile));
             }
             catch (Exception ex)
             {
@@ -222,9 +274,17 @@ namespace FileFlow
 
         private void openLogsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This is currently in development and will soon support file logging", "Coming soon!");
-        }
+            string logDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string logFolder = "FileFlow Logs";
+            string combineFolder = Path.Combine(logDir, logFolder);
+            if (!Directory.Exists(combineFolder))
+            {
+                Directory.CreateDirectory(combineFolder);
+            }
+            Process.Start("explorer.exe", combineFolder);
 
+        }
+        #region Colors
         private void redToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.Red;
@@ -352,5 +412,6 @@ namespace FileFlow
         {
             statsBox.BackColor = Color.Purple;
         }
+        #endregion
     }
 }
