@@ -224,6 +224,6 @@ Download the latest installer and follow the installation instructions provided 
 
 ## Author
 
-**Austin Toms**
+**LogicOutpost**
 
 C# / .NET developer in training, building practical desktop applications and expanding skills through progressively larger projects.
